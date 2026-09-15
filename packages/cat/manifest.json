@@ -1,0 +1,21 @@
+{
+  "name": "Cosmic & Cyber Cat Visualizer",
+  "description": "Modular audio visualizer & live wallpaper featuring Cyber and Cosmic cats with reactive audio effects and settings panel.",
+  "preview": "dist/cat-preview.png",
+  "main": "dist/cat-visualizer.js",
+  "readme": "packages/cat/README.md",
+  "authors": [
+    {
+      "name": "Erozah",
+      "url": "https://github.com/Erozah"
+    }
+  ],
+  "tags": [
+    "visualizer",
+    "audio",
+    "wallpaper",
+    "cat",
+    "cyberpunk",
+    "canvas"
+  ]
+}

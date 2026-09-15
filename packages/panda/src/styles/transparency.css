@@ -1,0 +1,389 @@
+/* src/styles/transparency.css - Spotify UI transparency, sharp text legibility, and frosted glass bottom bar for Panda Visualizer */
+
+body.panda-visualizer-active {
+    --spice-main: transparent !important;
+    --spice-sidebar: transparent !important;
+    --spice-player: transparent !important;
+    --spice-card: rgba(255, 255, 255, 0.04) !important;
+    --spice-main-elevated: rgba(255, 255, 255, 0.04) !important;
+}
+
+body.panda-visualizer-active #main,
+body.panda-visualizer-active .Root__top-container {
+    position: relative !important;
+    z-index: 1 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* 1. Left Sidebar - Structural Expansion for Virtualized List & Transparency */
+body.panda-visualizer-active .Root__nav-bar,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id,
+body.panda-visualizer-active .YourLibraryX,
+body.panda-visualizer-active .main-yourLibraryX-library,
+body.panda-visualizer-active .main-yourLibraryX-listContent {
+    height: 100% !important;
+    min-height: 100% !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id,
+body.panda-visualizer-active .main-yourLibraryX-navBar,
+body.panda-visualizer-active .main-yourLibraryX-library,
+body.panda-visualizer-active .main-yourLibraryX-libraryContainer,
+body.panda-visualizer-active .main-yourLibraryX-header,
+body.panda-visualizer-active .main-yourLibraryX-listContent,
+body.panda-visualizer-active .main-yourLibraryX-isScrolled,
+body.panda-visualizer-active .main-rootlist-rootlist,
+body.panda-visualizer-active .main-rootlist-wrapper,
+body.panda-visualizer-active .main-navBar-mainNav,
+body.panda-visualizer-active .main-navBar-navBar,
+body.panda-visualizer-active .YourLibraryX,
+body.panda-visualizer-active .main-yourLibraryX-entryPoints {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+/* 2. Left Panel - Classic Gray Bubbles / Chips ("Playlist", "Artiste", "Albums") strictly scoped to Left Sidebar */
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-filterChips,
+body.panda-visualizer-active .Root__nav-bar .chips-container,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .chips-container,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-filterChips,
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-entryPoints .chips-container,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-entryPoints .chips-container {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-filterChips button,
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-chip,
+body.panda-visualizer-active .Root__nav-bar .main-chip-chip,
+body.panda-visualizer-active .Root__nav-bar [data-testid="your-library-chip"],
+body.panda-visualizer-active .Root__nav-bar [data-testid="chip"],
+body.panda-visualizer-active .Root__nav-bar [data-encore-id="chip"],
+body.panda-visualizer-active .Root__nav-bar [role="radio"],
+body.panda-visualizer-active .Root__nav-bar [role="checkbox"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-filterChips button,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-chip,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-chip-chip,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-testid="your-library-chip"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-testid="chip"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-encore-id="chip"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [role="radio"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [role="checkbox"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-testid*="chip"] {
+    background-color: #2a2a2a !important;
+    background: #2a2a2a !important;
+    color: #ffffff !important;
+    border-radius: 32px !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 4px 12px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s ease, transform 0.15s ease !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-filterChips button *,
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-chip *,
+body.panda-visualizer-active .Root__nav-bar .main-chip-chip *,
+body.panda-visualizer-active .Root__nav-bar [data-testid="your-library-chip"] *,
+body.panda-visualizer-active .Root__nav-bar [data-testid="chip"] *,
+body.panda-visualizer-active .Root__nav-bar [data-encore-id="chip"] *,
+body.panda-visualizer-active .Root__nav-bar [role="radio"] *,
+body.panda-visualizer-active .Root__nav-bar [role="checkbox"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-filterChips button *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-chip *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-chip-chip *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-testid="your-library-chip"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-testid="chip"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-encore-id="chip"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [role="radio"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [role="checkbox"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-testid*="chip"] * {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-filterChips button:hover,
+body.panda-visualizer-active .Root__nav-bar .main-yourLibraryX-chip:hover,
+body.panda-visualizer-active .Root__nav-bar [role="radio"]:hover,
+body.panda-visualizer-active .Root__nav-bar [role="checkbox"]:hover,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-filterChips button:hover,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id .main-yourLibraryX-chip:hover,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [role="radio"]:hover,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [role="checkbox"]:hover {
+    background-color: #383838 !important;
+    background: #383838 !important;
+    transform: scale(1.03) !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar [aria-checked="true"],
+body.panda-visualizer-active .Root__nav-bar [data-active="true"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [aria-checked="true"],
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-active="true"] {
+    background-color: #10b981 !important;
+    background: #10b981 !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    border-color: #10b981 !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar [aria-checked="true"] *,
+body.panda-visualizer-active .Root__nav-bar [data-active="true"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [aria-checked="true"] *,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id [data-active="true"] * {
+    color: #000000 !important;
+    fill: #000000 !important;
+}
+
+/* 3. Left Sidebar Item Rows & Typography */
+body.panda-visualizer-active .main-yourLibraryX-listRowTitle,
+body.panda-visualizer-active .main-yourLibraryX-rowTitle,
+body.panda-visualizer-active .main-yourLibraryX-headerTitle,
+body.panda-visualizer-active .main-rootlist-rootlistItem span,
+body.panda-visualizer-active .main-rootlist-rootlistItem a {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+body.panda-visualizer-active .main-yourLibraryX-listRowSubtitle,
+body.panda-visualizer-active .main-yourLibraryX-rowSubTitle,
+body.panda-visualizer-active .main-yourLibraryX-listRowSubtitleLeadingWrapper,
+body.panda-visualizer-active .main-yourLibraryX-listRowSubtitleLeadingWrapper span {
+    color: rgba(255, 255, 255, 0.85) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 4. Right Sidebar - Full Transparency & Complete Text Legibility */
+body.panda-visualizer-active .Root__right-sidebar,
+body.panda-visualizer-active .main-nowPlayingView-container,
+body.panda-visualizer-active .main-nowPlayingView-content,
+body.panda-visualizer-active .main-nowPlayingView-nowPlayingWidget,
+body.panda-visualizer-active .main-nowPlayingView-section,
+body.panda-visualizer-active .main-nowPlayingView-aboutArtistV2,
+body.panda-visualizer-active .main-nowPlayingView-lyrics,
+body.panda-visualizer-active .main-nowPlayingView-queue,
+body.panda-visualizer-active .main-nowPlayingView-credits,
+body.panda-visualizer-active .main-buddyFeed-container,
+body.panda-visualizer-active .main-buddyFeed-content,
+body.panda-visualizer-active .main-nowPlayingWidget-nowPlaying,
+body.panda-visualizer-active .main-trackInfo-container,
+body.panda-visualizer-active .main-trackInfo-trackInfo {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+/* Right Sidebar Typography */
+body.panda-visualizer-active .Root__right-sidebar h1,
+body.panda-visualizer-active .Root__right-sidebar h2,
+body.panda-visualizer-active .Root__right-sidebar h3,
+body.panda-visualizer-active .Root__right-sidebar h4,
+body.panda-visualizer-active .Root__right-sidebar [data-testid="context-item-info-title"],
+body.panda-visualizer-active .Root__right-sidebar [data-testid="context-item-info-title"] a,
+body.panda-visualizer-active .Root__right-sidebar .main-nowPlayingView-contextItemInfoTitle {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-weight: 700 !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+body.panda-visualizer-active .Root__right-sidebar p,
+body.panda-visualizer-active .Root__right-sidebar span,
+body.panda-visualizer-active .Root__right-sidebar a,
+body.panda-visualizer-active .Root__right-sidebar button,
+body.panda-visualizer-active .Root__right-sidebar [data-testid="context-item-info-subtitles"],
+body.panda-visualizer-active .Root__right-sidebar [data-testid="context-item-info-subtitles"] a,
+body.panda-visualizer-active .Root__right-sidebar .main-nowPlayingView-aboutArtistV2 *,
+body.panda-visualizer-active .Root__right-sidebar .main-nowPlayingView-lyrics *,
+body.panda-visualizer-active .Root__right-sidebar .main-nowPlayingView-queue *,
+body.panda-visualizer-active .Root__right-sidebar .main-nowPlayingView-credits * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+body.panda-visualizer-active .Root__right-sidebar [data-testid="context-item-info-subtitles"],
+body.panda-visualizer-active .Root__right-sidebar [data-testid="context-item-info-subtitles"] a,
+body.panda-visualizer-active .Root__right-sidebar .main-trackInfo-artists,
+body.panda-visualizer-active .Root__right-sidebar .main-trackInfo-artists a {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 5. Top Navigation Bar - Full Transparency */
+body.panda-visualizer-active .Root__top-bar,
+body.panda-visualizer-active .Root__globalNav,
+body.panda-visualizer-active .main-topBar-container,
+body.panda-visualizer-active .main-topBar-background,
+body.panda-visualizer-active .main-topBar-overlay,
+body.panda-visualizer-active .main-topBar-historyButtons {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+/* 6. Bottom Player Bar - Sleek Frosted Glass & 100% Guaranteed Crisp Text Visibility */
+body.panda-visualizer-active .Root__now-playing-bar,
+body.panda-visualizer-active .main-nowPlayingBar-container,
+body.panda-visualizer-active .main-nowPlayingBar-nowPlayingBar {
+    background: rgba(6, 18, 12, 0.82) !important;
+    background-color: rgba(6, 18, 12, 0.82) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4) !important;
+    --spice-text: #ffffff !important;
+    --spice-subtext: rgba(255, 255, 255, 0.88) !important;
+    --text-base: #ffffff !important;
+    --text-subdued: rgba(255, 255, 255, 0.88) !important;
+    --text-bright-accent: #10b981 !important;
+    --essential-subdued: rgba(255, 255, 255, 0.88) !important;
+    --essential-base: #ffffff !important;
+}
+
+/* Force 100% opacity and visibility for every element in bottom bar */
+body.panda-visualizer-active .Root__now-playing-bar,
+body.panda-visualizer-active .Root__now-playing-bar *,
+body.panda-visualizer-active .main-nowPlayingBar-container,
+body.panda-visualizer-active .main-nowPlayingBar-container *,
+body.panda-visualizer-active .main-nowPlayingBar-nowPlayingBar,
+body.panda-visualizer-active .main-nowPlayingBar-nowPlayingBar * {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* CRITICAL FIX FOR TRACK TITLE & ARTISTS: Remove marquee mask-image that caused complete transparency */
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-container,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-container *,
+body.panda-visualizer-active .Root__now-playing-bar [class*="trackInfo"],
+body.panda-visualizer-active .Root__now-playing-bar [class*="trackInfo"] *,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-overlay,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-name,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-artists,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-contentWrapper,
+body.panda-visualizer-active .Root__now-playing-bar [class*="marquee"],
+body.panda-visualizer-active .Root__now-playing-bar [class*="Marquee"] {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    mask: none !important;
+    -webkit-mask: none !important;
+    overflow: visible !important;
+}
+
+/* Album art thumbnail in bottom left */
+body.panda-visualizer-active .Root__now-playing-bar img,
+body.panda-visualizer-active .main-nowPlayingBar-container img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Primary text in bottom bar: Title, track info, connect text, all spans & links */
+body.panda-visualizer-active .Root__now-playing-bar a,
+body.panda-visualizer-active .Root__now-playing-bar span,
+body.panda-visualizer-active .Root__now-playing-bar p,
+body.panda-visualizer-active .Root__now-playing-bar div,
+body.panda-visualizer-active .Root__now-playing-bar [class*="encore-text"],
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-name,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-name a,
+body.panda-visualizer-active .Root__now-playing-bar [data-testid="context-item-info-title"],
+body.panda-visualizer-active .main-nowPlayingBar-container a,
+body.panda-visualizer-active .main-nowPlayingBar-container span,
+body.panda-visualizer-active .main-nowPlayingBar-container p,
+body.panda-visualizer-active .main-nowPlayingBar-container [class*="encore-text"] {
+    color: #ffffff !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 0 6px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Subdued secondary text: Artists, time counters, playback duration */
+body.panda-visualizer-active .Root__now-playing-bar [data-testid="context-item-info-subtitles"],
+body.panda-visualizer-active .Root__now-playing-bar [data-testid="context-item-info-subtitles"] *,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-artists,
+body.panda-visualizer-active .Root__now-playing-bar .main-trackInfo-artists *,
+body.panda-visualizer-active .Root__now-playing-bar .playback-bar__progress-time,
+body.panda-visualizer-active .Root__now-playing-bar [data-testid="playback-position"],
+body.panda-visualizer-active .Root__now-playing-bar [data-testid="playback-duration"],
+body.panda-visualizer-active .Root__now-playing-bar [class*="subdued"],
+body.panda-visualizer-active .Root__now-playing-bar [class*="encore-text-body-small"] {
+    color: rgba(255, 255, 255, 0.88) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Bottom Bar Icons (shuffle, previous, next, repeat, lyrics, queue, connect, volume) */
+body.panda-visualizer-active .Root__now-playing-bar svg:not(.main-playPauseButton-button svg):not([data-testid="control-button-playpause"] svg):not([data-testid="play-button"] svg) {
+    fill: #ffffff !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9)) !important;
+}
+
+/* Spotify Play/Pause Button Exception: black icon on white circular button */
+body.panda-visualizer-active .Root__now-playing-bar .main-playPauseButton-button,
+body.panda-visualizer-active .Root__now-playing-bar button[data-testid="control-button-playpause"],
+body.panda-visualizer-active .Root__now-playing-bar button[data-testid="play-button"] {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+body.panda-visualizer-active .Root__now-playing-bar .main-playPauseButton-button *,
+body.panda-visualizer-active .Root__now-playing-bar button[data-testid="control-button-playpause"] *,
+body.panda-visualizer-active .Root__now-playing-bar button[data-testid="play-button"] * {
+    color: #000000 !important;
+    fill: #000000 !important;
+    text-shadow: none !important;
+}
+
+/* 7. Typography Variables for lateral panels */
+body.panda-visualizer-active .Root__nav-bar,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id,
+body.panda-visualizer-active .Root__right-sidebar,
+body.panda-visualizer-active .Root__top-bar,
+body.panda-visualizer-active .Root__globalNav {
+    --text-base: #ffffff !important;
+    --text-subdued: rgba(255, 255, 255, 0.85) !important;
+    --text-bright-accent: #10b981 !important;
+    --essential-subdued: rgba(255, 255, 255, 0.85) !important;
+    --essential-base: #ffffff !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar a,
+body.panda-visualizer-active .Root__nav-bar p,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id a,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id p,
+body.panda-visualizer-active .Root__right-sidebar a,
+body.panda-visualizer-active .Root__right-sidebar p {
+    color: #ffffff !important;
+}
+
+body.panda-visualizer-active .Root__nav-bar svg,
+body.panda-visualizer-active #Desktop_LeftSidebar_Id svg,
+body.panda-visualizer-active .Root__right-sidebar svg {
+    fill: currentColor !important;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9)) !important;
+}

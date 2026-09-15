@@ -1,0 +1,107 @@
+/* src/styles/mainView.css - Dynamic central view visibility & transparency for Panda Visualizer */
+
+/* 1. Containers: ALWAYS transparent, full height, visible (Never visibility:hidden or opacity:0 on containers to preserve CEF transparent composition) */
+body.panda-visualizer-active .Root__main-view,
+body.panda-visualizer-active main,
+body.panda-visualizer-active .main-view-container,
+body.panda-visualizer-active .Root__main-view .main-view-container__scroll-node,
+body.panda-visualizer-active .Root__main-view .main-view-container__scroll-node-child,
+body.panda-visualizer-active .Root__main-view .os-viewport,
+body.panda-visualizer-active .Root__main-view .os-host,
+body.panda-visualizer-active .Root__main-view .os-padding,
+body.panda-visualizer-active .Root__main-view .os-content {
+    height: 100% !important;
+    min-height: 100% !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* 2. Suppress before-scroll-node and under-main-view (Spotify's ambient artist/album hero background image and gradient banner) */
+body.panda-visualizer-active .before-scroll-node,
+body.panda-visualizer-active .before-scroll-node *,
+body.panda-visualizer-active [class*="before-scroll-node"],
+body.panda-visualizer-active [class*="before-scroll-node"] *,
+body.panda-visualizer-active .under-main-view,
+body.panda-visualizer-active .under-main-view *,
+body.panda-visualizer-active [class*="under-main-view"],
+body.panda-visualizer-active [class*="under-main-view"] * {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* 3. VISUALIZER ACTIVE: Suppress all images, artist headers, covers, and hero banners in central panel */
+body.panda-visualizer-active .Root__main-view img,
+body.panda-visualizer-active .Root__main-view picture,
+body.panda-visualizer-active .Root__main-view [role="img"],
+body.panda-visualizer-active .Root__main-view [style*="background-image"],
+body.panda-visualizer-active .Root__main-view [class*="HeaderBackground"],
+body.panda-visualizer-active .Root__main-view [class*="artistOverview"],
+body.panda-visualizer-active .Root__main-view [class*="entityHeader"],
+body.panda-visualizer-active .Root__main-view [class*="coverSlot"],
+body.panda-visualizer-active .Root__main-view [class*="heroCard"],
+body.panda-visualizer-active .Root__main-view [class*="imageContainer"],
+body.panda-visualizer-active .Root__main-view [data-testid*="image"],
+body.panda-visualizer-active .Root__main-view [data-testid*="header"],
+body.panda-visualizer-active .Root__main-view [data-testid*="hero"],
+body.panda-visualizer-active .Root__main-view [data-testid*="banner"],
+body.panda-visualizer-active .Root__main-view video,
+body.panda-visualizer-active .Root__main-view canvas:not(#panda-visualizer-canvas) {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    background-image: none !important;
+}
+
+/* 4. VISUALIZER ACTIVE: Hide all buttons and chips inside central panel */
+body.panda-visualizer-active .Root__main-view button,
+body.panda-visualizer-active .Root__main-view [role="radio"],
+body.panda-visualizer-active .Root__main-view [role="checkbox"],
+body.panda-visualizer-active .Root__main-view [class*="Chip"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* 5. VISUALIZER ACTIVE: Hide central Spotify content (tracks, playlists, cards, banners, headers) without breaking parent containers */
+body.panda-visualizer-active .Root__main-view .main-view-container__scroll-node-child *,
+body.panda-visualizer-active .Root__main-view .os-content *,
+body.panda-visualizer-active .Root__main-view main > section,
+body.panda-visualizer-active .Root__main-view main > div,
+body.panda-visualizer-active .Root__main-view section,
+body.panda-visualizer-active .Root__main-view header,
+body.panda-visualizer-active .Root__main-view footer,
+body.panda-visualizer-active .Root__main-view .contentSpacing,
+body.panda-visualizer-active .Root__main-view .main-home-homeHeader,
+body.panda-visualizer-active .Root__main-view .main-actionBarBackground-background,
+body.panda-visualizer-active .Root__main-view .main-entityHeader-background,
+body.panda-visualizer-active .Root__main-view .main-entityHeader-overlay,
+body.panda-visualizer-active .Root__main-view .main-entityHeader-container,
+body.panda-visualizer-active .Root__main-view .main-trackList-trackListHeader,
+body.panda-visualizer-active .Root__main-view .main-trackList-trackListHeaderRow,
+body.panda-visualizer-active .Root__main-view .main-shelf-shelf,
+body.panda-visualizer-active .Root__main-view .main-trackList-trackList,
+body.panda-visualizer-active .Root__main-view .main-gridContainer-gridContainer,
+body.panda-visualizer-active .Root__main-view .main-card-card,
+body.panda-visualizer-active .Root__main-view [data-testid="tracklist-row"],
+body.panda-visualizer-active .Root__main-view [data-testid="home-page"],
+body.panda-visualizer-active .Root__main-view [data-testid="playlist-page"],
+body.panda-visualizer-active .Root__main-view [data-testid="album-page"],
+body.panda-visualizer-active .Root__main-view [data-testid="artist-page"],
+body.panda-visualizer-active .Root__main-view [data-testid="search-page"],
+body.panda-visualizer-active .Root__main-view [data-testid="infinite-scroll-list"] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 0.2s ease !important;
+}

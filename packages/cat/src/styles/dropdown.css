@@ -1,0 +1,392 @@
+/* src/styles/dropdown.css - Glassmorphic settings dropdown panel & toggles */
+
+#cosmic-cat-settings-dropdown,
+#cosmic-cat-settings-dropdown * {
+    box-sizing: border-box !important;
+}
+
+#cosmic-cat-settings-dropdown {
+    position: fixed !important;
+    z-index: 99999999 !important;
+    width: 320px !important;
+    max-width: 90vw !important;
+    background: rgba(12, 10, 26, 0.94) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(0, 240, 255, 0.35) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 240, 255, 0.2) !important;
+    padding: 16px !important;
+    font-family: inherit !important;
+    color: #ffffff !important;
+    pointer-events: auto !important;
+    user-select: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(10px) scale(0.96) !important;
+    transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.22s ease !important;
+}
+
+#cosmic-cat-settings-dropdown.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+}
+
+/* Header */
+#cosmic-cat-settings-dropdown .dropdown-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    margin-bottom: 12px !important;
+}
+
+#cosmic-cat-settings-dropdown .dropdown-title {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    color: #00f0ff !important;
+}
+
+#cosmic-cat-settings-dropdown .dropdown-close-btn {
+    background: transparent !important;
+    border: 0 !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    padding: 2px 6px !important;
+    border-radius: 6px !important;
+    transition: all 0.15s ease !important;
+}
+
+#cosmic-cat-settings-dropdown .dropdown-close-btn:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Section Common */
+#cosmic-cat-settings-dropdown .dropdown-section {
+    margin-bottom: 14px !important;
+}
+
+#cosmic-cat-settings-dropdown .section-label {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    margin-bottom: 8px !important;
+}
+
+/* Model Selector Grid (Exclusive) */
+#cosmic-cat-settings-dropdown .model-selector-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+}
+
+#cosmic-cat-settings-dropdown .model-btn {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 10px !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    outline: none !important;
+    white-space: nowrap !important;
+}
+
+#cosmic-cat-settings-dropdown .model-btn:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(0, 240, 255, 0.5) !important;
+    transform: translateY(-1px) !important;
+}
+
+#cosmic-cat-settings-dropdown .model-btn.active {
+    background: rgba(0, 240, 255, 0.15) !important;
+    border-color: #00f0ff !important;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.3) !important;
+}
+
+#cosmic-cat-settings-dropdown .model-icon {
+    font-size: 16px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+}
+
+#cosmic-cat-settings-dropdown .model-name {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+#cosmic-cat-settings-dropdown .model-btn.active .model-name {
+    color: #00f0ff !important;
+}
+
+/* Palette Swatches Row (Exclusive) */
+#cosmic-cat-settings-dropdown .palette-swatches-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 6px !important;
+    padding: 4px 0 !important;
+}
+
+#cosmic-cat-settings-dropdown .dropdown-palette-btn {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    outline: none !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#cosmic-cat-settings-dropdown .dropdown-palette-btn:hover {
+    transform: scale(1.3) !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 10px currentColor !important;
+}
+
+#cosmic-cat-settings-dropdown .dropdown-palette-btn.active {
+    transform: scale(1.35) !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 14px currentColor, 0 0 4px #ffffff !important;
+}
+
+/* Effects Toggle List (Independent) */
+#cosmic-cat-settings-dropdown .effects-toggle-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+}
+
+#cosmic-cat-settings-dropdown .effect-toggle-item {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 5px 8px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: background 0.15s ease !important;
+}
+
+#cosmic-cat-settings-dropdown .effect-toggle-item:hover {
+    background: rgba(255, 255, 255, 0.07) !important;
+}
+
+#cosmic-cat-settings-dropdown .effect-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+#cosmic-cat-settings-dropdown .effect-icon {
+    font-size: 14px !important;
+}
+
+#cosmic-cat-settings-dropdown .effect-name {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Animated Switch */
+#cosmic-cat-settings-dropdown .toggle-checkbox {
+    display: none !important;
+}
+
+#cosmic-cat-settings-dropdown .toggle-switch {
+    position: relative !important;
+    width: 32px !important;
+    height: 18px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 999px !important;
+    transition: background 0.2s ease !important;
+    flex-shrink: 0 !important;
+}
+
+#cosmic-cat-settings-dropdown .toggle-switch::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 2px !important;
+    width: 14px !important;
+    height: 14px !important;
+    background: #ffffff !important;
+    border-radius: 50% !important;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#cosmic-cat-settings-dropdown .toggle-checkbox:checked + .toggle-switch {
+    background: #00f0ff !important;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.5) !important;
+}
+
+#cosmic-cat-settings-dropdown .toggle-checkbox:checked + .toggle-switch::after {
+    transform: translateX(14px) !important;
+}
+
+/* Fullscreen Immersion Menu Button */
+#cosmic-cat-settings-dropdown .fullscreen-menu-btn {
+    width: 100% !important;
+    background: rgba(0, 240, 255, 0.08) !important;
+    border: 1px solid rgba(0, 240, 255, 0.35) !important;
+    border-radius: 10px !important;
+    padding: 8px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    cursor: pointer !important;
+    color: #ffffff !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+}
+
+#cosmic-cat-settings-dropdown .fullscreen-menu-btn:hover {
+    background: rgba(0, 240, 255, 0.2) !important;
+    border-color: #00f0ff !important;
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.35) !important;
+    transform: translateY(-1px) !important;
+}
+
+#cosmic-cat-settings-dropdown .fullscreen-menu-btn svg {
+    color: #00f0ff !important;
+    flex-shrink: 0 !important;
+}
+
+#cosmic-cat-settings-dropdown .fs-btn-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+#cosmic-cat-settings-dropdown .fs-btn-title {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+}
+
+#cosmic-cat-settings-dropdown .fs-btn-sub {
+    font-size: 9px !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    white-space: nowrap !important;
+}
+
+/* Audio Capture Button */
+#cosmic-cat-settings-dropdown .audio-capture-btn {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 10px !important;
+    padding: 8px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    cursor: pointer !important;
+    color: #ffffff !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-capture-btn:hover {
+    background: rgba(0, 240, 255, 0.12) !important;
+    border-color: rgba(0, 240, 255, 0.4) !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-capture-btn.active {
+    background: rgba(0, 240, 255, 0.18) !important;
+    border-color: #00f0ff !important;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.35) !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-capture-icon {
+    font-size: 16px !important;
+    flex-shrink: 0 !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-capture-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    flex: 1 !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-capture-title {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-capture-status {
+    font-size: 9px !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    white-space: nowrap !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-capture-btn.active .audio-capture-status {
+    color: #00f0ff !important;
+    font-weight: 600 !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-status-dot {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    transition: all 0.2s ease !important;
+    flex-shrink: 0 !important;
+}
+
+#cosmic-cat-settings-dropdown .audio-status-dot.active {
+    background: #00f0ff !important;
+    box-shadow: 0 0 8px #00f0ff, 0 0 14px #00f0ff !important;
+    animation: catLivePulse 1.2s ease-in-out infinite !important;
+}
+
+@keyframes catLivePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: 0.7; }
+}
+
+/* Footer */
+#cosmic-cat-settings-dropdown .dropdown-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 10px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    font-size: 10px !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+#cosmic-cat-settings-dropdown .footer-hint kbd {
+    background: rgba(255, 255, 255, 0.12) !important;
+    padding: 1px 4px !important;
+    border-radius: 3px !important;
+    color: #00f0ff !important;
+    font-family: inherit !important;
+}

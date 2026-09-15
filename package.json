@@ -1,0 +1,17 @@
+{
+  "name": "spicetify-visualizers",
+  "version": "1.0.0",
+  "description": "Monorepo of Spicetify audio visualizer extensions (Cat & Panda)",
+  "type": "module",
+  "scripts": {
+    "build": "vite build --config vite.cat.config.ts && vite build --config vite.panda.config.ts && node copy-to-spicetify.js",
+    "build:cat": "vite build --config vite.cat.config.ts",
+    "build:panda": "vite build --config vite.panda.config.ts",
+    "dev:cat": "vite --config vite.cat.config.ts",
+    "dev:panda": "vite --config vite.panda.config.ts"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "vite-plugin-css-injected-by-js": "^3.3.0"
+  }
+}

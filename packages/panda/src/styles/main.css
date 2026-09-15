@@ -1,0 +1,9 @@
+/* src/styles/main.css - Modular stylesheet index */
+@import "./root.css";
+@import "./canvas.css";
+@import "./transparency.css";
+@import "./mainView.css";
+@import "./dropdown.css";
+@import "./fullscreen.css";
+@import "./playbar.css";
+
