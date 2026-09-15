@@ -1,0 +1,16 @@
+{
+  "name": "spicetify-visualizers",
+  "version": "2.0.0",
+  "description": "Monorepo of Spicetify audio visualizer extensions (Engine + Mod Packs)",
+  "type": "module",
+  "scripts": {
+    "build": "vite build --config vite.engine.config.ts && vite build --config vite.cat.config.ts && vite build --config vite.panda.config.ts && node copy-to-spicetify.js",
+    "build:engine": "vite build --config vite.engine.config.ts",
+    "build:cat": "vite build --config vite.cat.config.ts",
+    "build:panda": "vite build --config vite.panda.config.ts"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "vite-plugin-css-injected-by-js": "^3.3.0"
+  }
+}

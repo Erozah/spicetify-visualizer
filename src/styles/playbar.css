@@ -1,0 +1,130 @@
+/* src/styles/playbar.css - The 2 discrete playbar buttons: On/Off & Settings Gear */
+
+.cosmic-playbar-btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 4px !important;
+    margin: 0 2px !important;
+    color: var(--spice-subtext, rgba(255, 255, 255, 0.65)) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    outline: none !important;
+}
+
+.cosmic-playbar-btn:hover {
+    color: #00f0ff !important;
+    transform: scale(1.15) !important;
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6)) !important;
+}
+
+#spicetify-visualizer-toggle-btn.active {
+    color: #00f0ff !important;
+    transform: scale(1.1) !important;
+    filter: drop-shadow(0 0 8px currentColor) !important;
+}
+
+#spicetify-visualizer-toggle-btn:not(.active) {
+    opacity: 0.55 !important;
+    filter: none !important;
+}
+
+#spicetify-visualizer-settings-btn:hover {
+    transform: rotate(30deg) scale(1.15) !important;
+}
+
+/* Spotify Play/Pause Button Contrast Fix: Crisp black icon on white button */
+.main-playPauseButton-button,
+button[data-testid="control-button-playpause"],
+button[data-testid="play-button"],
+.player-controls__buttons button.main-playPauseButton-button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+.main-playPauseButton-button svg,
+.main-playPauseButton-button path,
+.main-playPauseButton-button span,
+button[data-testid="control-button-playpause"] svg,
+button[data-testid="control-button-playpause"] path,
+button[data-testid="control-button-playpause"] span,
+button[data-testid="play-button"] svg,
+button[data-testid="play-button"] path,
+button[data-testid="play-button"] span,
+.player-controls__buttons button.main-playPauseButton-button svg,
+.player-controls__buttons button.main-playPauseButton-button path {
+    fill: #000000 !important;
+    color: #000000 !important;
+    text-shadow: none !important;
+}
+
+.main-playPauseButton-button:hover,
+button[data-testid="control-button-playpause"]:hover,
+button[data-testid="play-button"]:hover {
+    background-color: #f0f0f0 !important;
+    transform: scale(1.05) !important;
+}
+
+/* Spotify Toasts, Banners, Snackbars, Tooltips & System Messages (Scoped when visualizer is active) */
+body.cyber-cat-visualizer-active .notistack-SnackbarContainer {
+    z-index: 99999999 !important;
+}
+
+body.cyber-cat-visualizer-active .notistack-SnackbarContainer .notistack-Snackbar,
+body.cyber-cat-visualizer-active .notistack-SnackbarContainer [class*="Snackbar"],
+body.cyber-cat-visualizer-active .main-notificationBubble-notificationBubble,
+body.cyber-cat-visualizer-active .Root__notification-bar,
+body.cyber-cat-visualizer-active [data-testid="toast-box"],
+body.cyber-cat-visualizer-active [data-encore-id="toast"],
+body.cyber-cat-visualizer-active [data-encore-id="banner"],
+body.cyber-cat-visualizer-active [data-encore-id="popover"],
+body.cyber-cat-visualizer-active [data-encore-id="tooltip"] {
+    background: #100e20 !important;
+    background-color: #100e20 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(0, 240, 255, 0.45) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85), 0 0 16px rgba(0, 240, 255, 0.25) !important;
+    z-index: 99999999 !important;
+}
+
+/* Force ALL inner text & elements inside toasts/messages to be legible white on dark */
+body.cyber-cat-visualizer-active .notistack-SnackbarContainer .notistack-Snackbar *,
+body.cyber-cat-visualizer-active .notistack-SnackbarContainer [class*="Snackbar"] *,
+body.cyber-cat-visualizer-active .main-notificationBubble-notificationBubble *,
+body.cyber-cat-visualizer-active .Root__notification-bar *,
+body.cyber-cat-visualizer-active [data-testid="toast-box"] *,
+body.cyber-cat-visualizer-active [data-encore-id="toast"] *,
+body.cyber-cat-visualizer-active [data-encore-id="banner"] *,
+body.cyber-cat-visualizer-active [data-encore-id="popover"] *,
+body.cyber-cat-visualizer-active [data-encore-id="tooltip"] * {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    text-shadow: none !important;
+}
+
+/* Toast action buttons (e.g. Undo, Cancel, View) */
+body.cyber-cat-visualizer-active [data-testid="toast-box"] button,
+body.cyber-cat-visualizer-active [data-encore-id="toast"] button,
+body.cyber-cat-visualizer-active .main-notificationBubble-notificationBubble button,
+body.cyber-cat-visualizer-active .notistack-Snackbar button {
+    background: rgba(0, 240, 255, 0.15) !important;
+    border: 1px solid rgba(0, 240, 255, 0.5) !important;
+    border-radius: 6px !important;
+    color: #00f0ff !important;
+    padding: 2px 8px !important;
+    cursor: pointer !important;
+}
+
+body.cyber-cat-visualizer-active [data-testid="toast-box"] button:hover,
+body.cyber-cat-visualizer-active [data-encore-id="toast"] button:hover,
+body.cyber-cat-visualizer-active .main-notificationBubble-notificationBubble button:hover,
+body.cyber-cat-visualizer-active .notistack-Snackbar button:hover {
+    background: rgba(0, 240, 255, 0.3) !important;
+    color: #ffffff !important;
+}

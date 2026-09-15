@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spicetify Visualizer Engine - Web Demo</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #000; color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+        #demo-overlay {
+            position: absolute; z-index: 1000;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px; border-radius: 12px;
+            text-align: center; border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 400px;
+        }
+        #demo-overlay h1 { margin-top: 0; font-size: 24px; color: #1ed760; }
+        #demo-overlay p { line-height: 1.5; color: #ccc; }
+        button {
+            background: #1ed760; color: #000;
+            border: none; padding: 12px 24px; font-weight: bold;
+            border-radius: 50px; cursor: pointer; font-size: 16px;
+            margin-top: 20px; transition: transform 0.2s;
+        }
+        button:hover { transform: scale(1.05); }
+        .hidden { display: none !important; }
+        #spicetify-visualizer-canvas { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+
+    <div id="demo-overlay">
+        <h1>Spicetify Visualizer</h1>
+        <p>Ceci est une démo web autonome du moteur de visualisation.</p>
+        <p>Le moteur va utiliser le <strong>Microphone</strong> pour analyser le son environnant en temps réel.</p>
+        <button id="start-btn">Démarrer (Activer le Micro)</button>
+    </div>
+
+    <!-- Mocks minimalistes de l'API Spicetify pour tromper l'extension -->
+    <script>
+        window.Spicetify = {
+            Player: {
+                addEventListener: () => {},
+                removeEventListener: () => {},
+                data: { item: null },
+                isPlaying: () => true
+            },
+            Platform: {
+                History: { listen: () => {} }
+            }
+        };
+        
+        // Mock du bouton Playbar pour qu'il ne crashe pas en s'injectant
+        document.body.innerHTML += '<div class="main-playBar-PlayBar" style="display:none;"><div class="main-playBar-extraControls"></div></div>';
+    </script>
+
+    <!-- Chargement des scripts compilés -->
+    <script src="dist/spicetify-visualizer-engine.js"></script>
+    <script src="dist/visualizer-pack-cat.js"></script>
+    <script src="dist/visualizer-pack-panda.js"></script>
+
+    <script>
+        document.getElementById('start-btn').addEventListener('click', () => {
+            document.getElementById('demo-overlay').classList.add('hidden');
+            
+            // Simule un clic sur l'icône de la barre de lecture injectée par le moteur
+            const toggleBtn = document.querySelector('.spicetify-visualizer-toggle');
+            if(toggleBtn) toggleBtn.click();
+
+            // Attendre un instant et forcer l'activation du microphone dans les options
+            setTimeout(() => {
+                const micBtn = document.getElementById('spicetify-visualizer-dropdown-live-audio-btn');
+                if(micBtn) micBtn.click();
+            }, 500);
+        });
+    </script>
+
+</body>
+</html>
