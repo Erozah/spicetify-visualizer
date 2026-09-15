@@ -10,6 +10,7 @@ import { PictureInPictureWindowManager } from './PictureInPictureWindowManager.j
 import { RedPanda } from '../models/redpanda/RedPanda.js';
 import { RenderPipelineRouter, renderVisualizerFrame } from './RenderPipelineRouter.js';
 import { UiStateSynchronizer, updateVisualizerUI } from './UiStateSynchronizer.js';
+import { closeSettingsDropdown } from '../ui/SettingsDropdownBuilder.js';
 
 export class PandaVisualizerEngine {
     constructor(canvasElement) {
@@ -33,10 +34,7 @@ export class PandaVisualizerEngine {
             this.paletteManager.setPalette('bamboo', true);
         }
 
-        const savedActive = (typeof localStorage !== 'undefined')
-            ? (localStorage.getItem('panda-visualizer-bg-enabled') === 'true')
-            : false;
-        this.isForeground = savedActive;
+        this.isForeground = false; // Always start inactive regardless of saved state
         this.isFrozen = true;
         this.loopRunning = false;
         this.isFullscreen = false;
@@ -59,7 +57,7 @@ export class PandaVisualizerEngine {
 
         PanelBoundsSynchronizer.setupResizeHandling(this);
         GlobalKeybindings.register(this);
-        FullscreenManager.register(this);
+        FullscreenManager.setupFullscreenClickHandler(this);
 
 
 
@@ -110,6 +108,7 @@ export class PandaVisualizerEngine {
         }
 
         if (this.isForeground) {
+            PlaybackStateSynchronizer.broadcastActivation("panda"); // tell cat to close
             if (this.canvas) {
                 this.canvas.style.display = 'block';
             }
@@ -127,9 +126,7 @@ export class PandaVisualizerEngine {
                 this.canvas.style.display = 'none';
             }
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            if (typeof closeSettingsDropdown === 'function') {
-                closeSettingsDropdown();
-            }
+            closeSettingsDropdown();
         }
 
         this.updateAllUI();
@@ -192,7 +189,7 @@ export class PandaVisualizerEngine {
     }
 
     toggleFullscreen(forcedState) {
-        FullscreenManager.toggle(this, forcedState);
+        FullscreenManager.toggleVisualizerFullscreen(this, forcedState);
     }
 
     renderFrame(deltaTimeSeconds, isStatic = false) {

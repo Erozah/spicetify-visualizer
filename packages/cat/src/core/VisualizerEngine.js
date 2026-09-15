@@ -33,9 +33,8 @@ export class CatVisualizerEngine {
         const savedTheme = typeof localStorage !== "undefined" ? localStorage.getItem("cosmic-cat-theme") : null;
         if (savedTheme) this.paletteManager.setPalette(savedTheme, true);
 
-        const savedEnabled = typeof localStorage !== "undefined" ? localStorage.getItem("cosmic-cat-bg-enabled") === "true" : false;
-        this.isForeground = savedEnabled;
-        this.isFrozen = !savedEnabled;
+        this.isForeground = false; // Always start inactive regardless of saved state
+        this.isFrozen = true;
         this.loopRunning = false;
         this.isFullscreen = false;
         this.liveTime = 0;
