@@ -8,7 +8,7 @@ Un moteur de visualisation audio 60 FPS pour **Spotify** (via Spicetify), entiè
 
 **🔗 [DÉMO EN LIGNE (Testez dans votre navigateur) ↗](https://erozah.github.io/spicetify-visualizer/)**
 
-![Aperçu du Visualiseur](https://raw.githubusercontent.com/Erozah/spicetify-visualizer/main/assets/preview.gif) *(Si l'image n'est pas disponible, imaginez un superbe chat cosmique réagissant aux basses)*
+![Aperçu du Visualiseur](https://raw.githubusercontent.com/Erozah/spicetify-visualizer/main/assets/preview.jpg) *(Aperçu généré du chat cosmique et du panda roux)*
 
 ---
 
