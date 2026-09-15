@@ -118,4 +118,3 @@ export function renderCyberHeadPolygon(
 }
 
 // Backward-compatible alias
-export const renderCyberHead = renderCyberHeadPolygon;

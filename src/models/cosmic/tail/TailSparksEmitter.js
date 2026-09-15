@@ -91,5 +91,3 @@ export function renderTailSparksEmitter(canvasRenderingContext, sparkParticlesLi
 }
 
 // Backward-compatible aliases
-export const updateTailSparks = updateTailSparksEmitter;
-export const renderTailSparks = renderTailSparksEmitter;

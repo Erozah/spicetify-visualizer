@@ -99,4 +99,3 @@ export function renderDeckHorizonLighting(
 }
 
 // Backward-compatible alias
-export const renderDeckLighting = renderDeckHorizonLighting;

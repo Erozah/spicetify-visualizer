@@ -64,4 +64,3 @@ export function decorateVisualizerPalette(rawPaletteSpecification) {
 }
 
 // Backward-compatible alias
-export const decoratePalette = decorateVisualizerPalette;

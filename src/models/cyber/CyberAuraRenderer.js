@@ -59,4 +59,3 @@ export function renderCyberSilhouetteAura(canvasRenderingContext, audioFeatureSt
 }
 
 // Backward-compatible alias
-export const renderCyberBodyAura = renderCyberSilhouetteAura;

@@ -101,4 +101,3 @@ export class CyberGridHorizon {
     }
 }
 
-export const CyberGrid = CyberGridHorizon;

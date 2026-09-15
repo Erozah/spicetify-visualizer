@@ -83,4 +83,3 @@ export function renderCyberTailSegmented(
 }
 
 // Backward-compatible alias
-export const renderCyberTail = renderCyberTailSegmented;

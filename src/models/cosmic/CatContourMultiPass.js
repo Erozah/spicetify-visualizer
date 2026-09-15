@@ -61,4 +61,3 @@ export function renderCatContourMultiPass(
 }
 
 // Backward-compatible alias
-export const renderCatContour = renderCatContourMultiPass;

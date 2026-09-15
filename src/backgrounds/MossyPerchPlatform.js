@@ -164,4 +164,3 @@ export class MossyPerchPlatform {
 }
 
 // Backward compatibility alias
-var MossyPerch = MossyPerchPlatform;

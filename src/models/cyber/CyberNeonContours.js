@@ -72,4 +72,3 @@ export function renderCyberNeonContours(canvasRenderingContext, audioFeatureStat
 }
 
 // Backward-compatible alias
-export const renderCyberBodyContours = renderCyberNeonContours;

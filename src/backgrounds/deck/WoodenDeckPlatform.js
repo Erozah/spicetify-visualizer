@@ -71,4 +71,3 @@ export class WoodenDeckPlatform {
 }
 
 // Backward-compatible alias
-export const WoodenDeck = WoodenDeckPlatform;

@@ -102,4 +102,3 @@ export function updateTailKinematicsPhysics(
     }
 }
 
-export const updateTailKinematics = updateTailKinematicsPhysics;

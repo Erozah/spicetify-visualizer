@@ -94,6 +94,3 @@ export class FullscreenManager {
     }
 }
 
-export const toggleVisualizerFullscreen = (engine, forcedState) => FullscreenManager.toggle(engine, forcedState);
-export const setupFullscreenClickHandler = (engine) => FullscreenManager.register(engine);
-export const showFullscreenNotificationToast = () => FullscreenManager.showToast();

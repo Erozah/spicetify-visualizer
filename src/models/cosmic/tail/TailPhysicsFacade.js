@@ -115,4 +115,3 @@ export class TailPhysicsFacade {
 }
 
 // Backward-compatible alias
-export const TailPhysics = TailPhysicsFacade;

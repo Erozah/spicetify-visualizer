@@ -45,25 +45,3 @@ export function mountGlobalCanvas() {
 export function getGlobalMountedCanvas() {
     return document.getElementById("cyber-cat-canvas");
 }
-
-/**
- * Verifies if the global visualizer canvas is currently attached to the DOM.
- * @returns {boolean}
- */
-export function isGlobalCanvasMounted() {
-    return !!document.getElementById("cyber-cat-canvas");
-}
-
-/**
- * Ensures canvas visibility matches active state without breaking DOM structure.
- * @param {boolean} isVisualizerForeground
- */
-export function setGlobalCanvasVisibility(isVisualizerForeground) {
-    const canvasElement = getGlobalMountedCanvas();
-    if (canvasElement) {
-        canvasElement.style.display = isVisualizerForeground ? "block" : "none";
-    }
-}
-
-// Backward-compatible alias
-export const initializeCanvas = mountGlobalCanvas;

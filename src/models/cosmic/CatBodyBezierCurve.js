@@ -86,4 +86,3 @@ export function traceCatBodyBezierCurve(
     }
 }
 
-export const buildCatBodyBezier = traceCatBodyBezierCurve;

@@ -114,4 +114,3 @@ export function renderTailCompositeLayers(
 }
 
 // Backward-compatible alias
-export const renderTailLayers = renderTailCompositeLayers;

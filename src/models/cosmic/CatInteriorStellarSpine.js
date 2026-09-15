@@ -92,4 +92,3 @@ export function renderCatInteriorStellarSpine(
 }
 
 // Backward-compatible alias
-export const renderCatInterior = renderCatInteriorStellarSpine;

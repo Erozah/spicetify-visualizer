@@ -106,4 +106,3 @@ export function renderCyberConstellationHeart(
     canvasRenderingContext.restore();
 }
 
-export const renderCyberConstellation = renderCyberConstellationHeart;

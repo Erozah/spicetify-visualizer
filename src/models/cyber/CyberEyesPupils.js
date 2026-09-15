@@ -90,4 +90,3 @@ export function renderCyberEyesAndPupils(
     canvasRenderingContext.restore();
 }
 
-export const renderCyberEyes = renderCyberEyesAndPupils;

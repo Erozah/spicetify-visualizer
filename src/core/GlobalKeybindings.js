@@ -46,4 +46,3 @@ export class GlobalKeybindings {
         });
     }
 }
-export const setupVisualizerKeybindings = (engine) => GlobalKeybindings.register(engine);

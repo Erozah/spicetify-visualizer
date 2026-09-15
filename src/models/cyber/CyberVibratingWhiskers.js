@@ -69,4 +69,3 @@ export function renderCyberVibratingWhiskers(
     canvasRenderingContext.restore();
 }
 
-export const renderCyberWhiskers = renderCyberVibratingWhiskers;

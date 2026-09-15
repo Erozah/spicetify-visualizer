@@ -99,5 +99,3 @@ export function renderDeckWoodPlanks(
 }
 
 // Backward-compatible aliases
-export const initDeckPlanks = initializeDeckPlankProfiles;
-export const renderDeckPlanks = renderDeckWoodPlanks;

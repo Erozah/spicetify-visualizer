@@ -76,4 +76,3 @@ export function buildTailClosedPath(
 }
 
 // Backward-compatible alias
-export const buildCatTailClosedSpline = buildTailClosedPath;

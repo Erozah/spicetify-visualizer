@@ -84,4 +84,3 @@ export class CosmicNebulaLayer {
 }
 
 // Backward-compatible alias
-export const CosmicNebula = CosmicNebulaLayer;

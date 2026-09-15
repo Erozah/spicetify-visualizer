@@ -168,5 +168,3 @@ export class AudioEngineStateUpdater {
     }
 }
 
-export const updateAudioEngineState = (engine, dt) => AudioEngineStateUpdater.update(engine, dt);
-export const syncAudioModelAliases = (engine) => AudioEngineStateUpdater.synchronizeModelAliases(engine);

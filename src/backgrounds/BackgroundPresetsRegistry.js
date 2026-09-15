@@ -56,4 +56,3 @@ export function persistBackgroundEffects(effectsState) {
     }
 }
 
-export const BACKGROUND_PRESETS = CURATED_BACKGROUND_PRESETS;

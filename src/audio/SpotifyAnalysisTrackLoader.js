@@ -134,4 +134,3 @@ export class SpotifyAnalysisTrackLoader {
     }
 }
 
-export const SpotifyAnalysis = SpotifyAnalysisTrackLoader;

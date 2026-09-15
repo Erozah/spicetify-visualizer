@@ -89,4 +89,3 @@ export class ShockwaveRingParticle {
 }
 
 // Backward-compatible alias
-export const Shockwave = ShockwaveRingParticle;

@@ -102,4 +102,3 @@ export function renderCatEarContours(
 }
 
 // Backward-compatible alias
-export const renderCatEars = renderCatEarContours;
