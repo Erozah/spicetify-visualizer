@@ -4,81 +4,661 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spicetify Visualizer Engine - Web Demo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
     <style>
+        :root {
+            --accent: #1ed760;
+            --accent-glow: rgba(30, 215, 96, 0.4);
+            --bg-panel: rgba(14, 12, 28, 0.88);
+            --border-panel: rgba(255, 255, 255, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
         body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: #000; color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #05040a;
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden;
-            display: flex; justify-content: center; align-items: center;
         }
+
+        /* --- Ecran de Bienvenue / Modal de Demarrage --- */
         #demo-overlay {
-            position: absolute; z-index: 1000;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 30px; border-radius: 12px;
-            text-align: center; border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 400px;
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: radial-gradient(circle at center, rgba(12, 10, 26, 0.92) 0%, rgba(3, 2, 8, 0.98) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: opacity 0.35s ease, visibility 0.35s ease;
         }
-        #demo-overlay h1 { margin-top: 0; font-size: 24px; color: #1ed760; }
-        #demo-overlay p { line-height: 1.5; color: #ccc; }
-        button {
-            background: #1ed760; color: #000;
-            border: none; padding: 12px 24px; font-weight: bold;
-            border-radius: 50px; cursor: pointer; font-size: 16px;
-            margin-top: 20px; transition: transform 0.2s;
+
+        #demo-overlay.hidden {
+            display: none !important;
         }
-        button:hover { transform: scale(1.05); }
-        .hidden { display: none !important; }
-        #spicetify-visualizer-canvas { width: 100%; height: 100%; }
+
+        .overlay-card {
+            background: rgba(18, 14, 36, 0.95);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            border-radius: 20px;
+            padding: 36px 32px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 240, 255, 0.15);
+            position: relative;
+        }
+
+        .overlay-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(30, 215, 96, 0.2), rgba(0, 240, 255, 0.2));
+            border: 1px solid rgba(30, 215, 96, 0.4);
+            color: #1ed760;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 14px;
+        }
+
+        .overlay-card h1 {
+            margin: 0 0 8px 0;
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 30%, #00f0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .overlay-card p {
+            margin: 0 0 22px 0;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .model-previews {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .model-chip {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1ed760, #17b34e);
+            color: #031508;
+            border: none;
+            padding: 14px 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(30, 215, 96, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(30, 215, 96, 0.45);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 12px 20px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .overlay-footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .overlay-footer kbd {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #ffffff;
+        }
+
+        /* --- Barre de Controle Flottante (Bottom HUD) --- */
+        #demo-toolbar {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-panel);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-panel);
+            border-radius: 50px;
+            padding: 6px 10px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 240, 255, 0.1);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            max-width: 95vw;
+            overflow-x: auto;
+        }
+
+        #demo-toolbar.hidden {
+            display: none !important;
+        }
+
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toolbar-divider {
+            width: 1px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 0 4px;
+        }
+
+        .toolbar-btn {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid transparent;
+            padding: 7px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            transition: all 0.18s ease;
+        }
+
+        .toolbar-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .toolbar-btn.active {
+            color: #ffffff;
+            background: rgba(0, 240, 255, 0.18);
+            border-color: rgba(0, 240, 255, 0.45);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+        }
+
+        .toolbar-btn.audio-active {
+            color: #1ed760;
+            background: rgba(30, 215, 96, 0.18);
+            border-color: rgba(30, 215, 96, 0.45);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            display: inline-block;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .status-dot.active {
+            background: #1ed760;
+            box-shadow: 0 0 8px #1ed760;
+            animation: pulse-dot 1.4s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.85); }
+        }
+
+        /* --- Toast Notification System --- */
+        #demo-toast {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            z-index: 1000000;
+            background: rgba(18, 14, 36, 0.95);
+            border: 1px solid rgba(0, 240, 255, 0.35);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        #demo-toast.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Canvas Fullscreen */
+        #cyber-cat-canvas {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 0 !important;
+        }
+
+        /* Input file masque */
+        #audio-file-input {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
-    <div id="demo-overlay">
-        <h1>Spicetify Visualizer</h1>
-        <p>Ceci est une démo web autonome du moteur de visualisation.</p>
-        <p>Le moteur va utiliser le <strong>Microphone</strong> pour analyser le son environnant en temps réel.</p>
-        <button id="start-btn">Démarrer (Activer le Micro)</button>
+    <!-- Canvas conteneur et Mocks d'injection Spicetify -->
+    <div class="Root__now-playing-bar main-nowPlayingBar-container" style="display:none;">
+        <div class="main-nowPlayingBar-extraControls"></div>
     </div>
 
-    <!-- Mocks minimalistes de l'API Spicetify pour tromper l'extension -->
+    <!-- Lecteur audio interne pour chargement de fichiers audio par l'utilisateur -->
+    <audio id="demo-audio" loop></audio>
+    <input type="file" id="audio-file-input" accept="audio/*">
+
+    <!-- Toast Notification -->
+    <div id="demo-toast"></div>
+
+    <!-- Ecran d'accueil interactif -->
+    <div id="demo-overlay">
+        <div class="overlay-card">
+            <span class="overlay-badge">Démo Web Autonome</span>
+            <h1>Spicetify Visualizer</h1>
+            <p>Moteur graphique 60 FPS avec physique cinématique de Verlet, nébuleuses cosmiques et analyse spectrale FFT en temps réel.</p>
+            
+            <div class="model-previews">
+                <div class="model-chip">🐱 Cyber Cat</div>
+                <div class="model-chip">🌌 Cosmic Cat</div>
+                <div class="model-chip">🐼 Red Panda</div>
+            </div>
+
+            <div class="cta-group">
+                <button id="btn-start-mic" class="btn-primary">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                    Démarrer avec le Microphone
+                </button>
+                <button id="btn-start-demo" class="btn-secondary">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    Mode Démo Rythmique (Sans Micro)
+                </button>
+                <button id="btn-start-file" class="btn-secondary">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+                    Charger un fichier audio (MP3, WAV...)
+                </button>
+            </div>
+
+            <div class="overlay-footer">
+                <span><kbd>C</kbd> On/Off</span>
+                <span><kbd>M</kbd> Modèle</span>
+                <span><kbd>T</kbd> Thème</span>
+                <span><kbd>F</kbd> Plein Écran</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barre de controle flottante en bas de l'ecran -->
+    <nav id="demo-toolbar" class="hidden">
+        <!-- Selecteur de Modeles -->
+        <div class="toolbar-group">
+            <button class="toolbar-btn active" data-model="cyber" id="model-btn-cyber">🐱 Cyber Cat</button>
+            <button class="toolbar-btn" data-model="cosmic" id="model-btn-cosmic">🌌 Cosmic Cat</button>
+            <button class="toolbar-btn" data-model="redpanda" id="model-btn-redpanda">🐼 Red Panda</button>
+        </div>
+
+        <div class="toolbar-divider"></div>
+
+        <!-- Selecteur de Theme -->
+        <div class="toolbar-group">
+            <button class="toolbar-btn" id="demo-theme-btn" title="Changer le thème de couleurs (T)">
+                🎨 <span id="current-theme-label">Cyberpunk</span>
+            </button>
+        </div>
+
+        <div class="toolbar-divider"></div>
+
+        <!-- Source Audio -->
+        <div class="toolbar-group">
+            <button class="toolbar-btn" id="demo-mic-toggle-btn" title="Activer / Couper le Microphone">
+                <span class="status-dot" id="demo-audio-dot"></span>
+                <span id="demo-audio-label">Microphone</span>
+            </button>
+            <button class="toolbar-btn" id="demo-load-file-btn" title="Charger votre propre fichier audio">
+                📁 Musique
+            </button>
+        </div>
+
+        <div class="toolbar-divider"></div>
+
+        <!-- Bouton Parametres & Plein Ecran -->
+        <div class="toolbar-group">
+            <button class="toolbar-btn" id="spicetify-visualizer-settings-btn" title="Ouvrir le panneau d'effets et paramètres">
+                ⚙️ Effets
+            </button>
+            <button class="toolbar-btn" id="demo-fs-btn" title="Mode Plein Écran (F)">
+                ⛶
+            </button>
+        </div>
+    </nav>
+
+    <!-- 1. Mocks robustes et exhaustifs de l'API Spicetify -->
     <script>
-        window.Spicetify = {
-            Player: {
-                addEventListener: () => {},
-                removeEventListener: () => {},
-                data: { item: null },
-                isPlaying: () => true
-            },
-            Platform: {
-                History: { listen: () => {} }
-            }
-        };
-        
-        // Mock du bouton Playbar pour qu'il ne crashe pas en s'injectant
-        document.body.innerHTML += '<div class="main-playBar-PlayBar" style="display:none;"><div class="main-playBar-extraControls"></div></div>';
+        (function() {
+            window.Spicetify = {
+                Player: {
+                    addEventListener: () => {},
+                    removeEventListener: () => {},
+                    data: { item: null },
+                    isPlaying: () => {
+                        return window.visualizerEngine ? Boolean(window.visualizerEngine.audio && window.visualizerEngine.audio.isPlaying) : true;
+                    },
+                    getProgress: () => {
+                        return window.visualizerEngine ? (window.visualizerEngine.audio.progress || 0) : 0;
+                    }
+                },
+                Platform: {
+                    History: { listen: () => {} }
+                },
+                showNotification: (msg) => {
+                    if (window.showDemoToast) window.showDemoToast(msg);
+                },
+                Menu: {
+                    Item: class {
+                        constructor(name, isSub, cb) { this.name = name; this.cb = cb; }
+                        register() {}
+                    }
+                }
+            };
+        })();
     </script>
 
-    <!-- Chargement des scripts compilés -->
+    <!-- 2. Chargement des scripts compilés du Moteur et des Packs -->
     <script src="dist/spicetify-visualizer-engine.js"></script>
     <script src="dist/visualizer-pack-cat.js"></script>
     <script src="dist/visualizer-pack-panda.js"></script>
 
+    <!-- 3. Controleur de la Demo Web -->
     <script>
-        document.getElementById('start-btn').addEventListener('click', () => {
-            document.getElementById('demo-overlay').classList.add('hidden');
-            
-            // Simule un clic sur l'icône de la barre de lecture injectée par le moteur
-            const toggleBtn = document.querySelector('.spicetify-visualizer-toggle');
-            if(toggleBtn) toggleBtn.click();
+        (function() {
+            let toastTimeout = null;
+            function showDemoToast(message) {
+                const toast = document.getElementById('demo-toast');
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('visible');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('visible');
+                }, 2800);
+            }
+            window.showDemoToast = showDemoToast;
+            window.startVisualizer = startVisualizer;
 
-            // Attendre un instant et forcer l'activation du microphone dans les options
-            setTimeout(() => {
-                const micBtn = document.getElementById('spicetify-visualizer-dropdown-live-audio-btn');
-                if(micBtn) micBtn.click();
-            }, 500);
-        });
+            function getEngine() {
+                return window.visualizerEngine;
+            }
+
+            // Mise a jour de l'UI de la barre flottante selon l'etat du moteur
+            function syncDemoUI() {
+                const eng = getEngine();
+                if (!eng) return;
+
+                // Modeles actifs
+                const activeModel = eng.activeModelId;
+                document.querySelectorAll('[data-model]').forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-model') === activeModel);
+                });
+
+                // Theme actif
+                if (eng.paletteManager && eng.paletteManager.active) {
+                    const themeLabel = document.getElementById('current-theme-label');
+                    if (themeLabel) themeLabel.textContent = eng.paletteManager.active.name || eng.paletteManager.active.id;
+                }
+
+                // Audio status
+                const isLiveMic = eng.audio && eng.audio.isLiveAudioActive();
+                const audioDot = document.getElementById('demo-audio-dot');
+                const audioBtn = document.getElementById('demo-mic-toggle-btn');
+                const audioLabel = document.getElementById('demo-audio-label');
+                
+                if (audioDot && audioBtn && audioLabel) {
+                    audioDot.classList.toggle('active', isLiveMic);
+                    audioBtn.classList.toggle('audio-active', isLiveMic);
+                    audioLabel.textContent = isLiveMic ? 'Micro: Actif' : 'Micro: Coupé';
+                }
+            }
+
+            // Demarrage du visualiseur
+            async function startVisualizer(audioMode = 'mic') {
+                document.getElementById('demo-overlay').classList.add('hidden');
+                document.getElementById('demo-toolbar').classList.remove('hidden');
+
+                const eng = getEngine();
+                if (!eng) {
+                    setTimeout(() => startVisualizer(audioMode), 100);
+                    return;
+                }
+
+                // S'assurer qu'un modele par defaut est defini
+                if (!eng.activeModelId) {
+                    eng.setModel('cyber');
+                }
+
+                // Activer le visualiseur au premier plan
+                eng.toggleActive(true);
+                eng.renderFrame(0.016, false);
+
+                if (audioMode === 'mic') {
+                    showDemoToast("Activation du Microphone...");
+                    try {
+                        const connected = await eng.audio.toggleLiveAudio();
+                        if (connected) {
+                            showDemoToast("🎙️ Microphone connecté en direct !");
+                        } else {
+                            showDemoToast("⚠️ Micro non disponible — Passage au rythme simulé.");
+                        }
+                    } catch (err) {
+                        showDemoToast("⚠️ Micro refusé — Rythme simulé actif.");
+                    }
+                } else if (audioMode === 'file') {
+                    document.getElementById('audio-file-input').click();
+                } else {
+                    showDemoToast("⚡ Mode Démo Rythmique activé !");
+                }
+
+                syncDemoUI();
+            }
+
+            // Boutons de demarrage de l'ecran d'accueil
+            document.getElementById('btn-start-mic').addEventListener('click', () => startVisualizer('mic'));
+            document.getElementById('btn-start-demo').addEventListener('click', () => startVisualizer('demo'));
+            document.getElementById('btn-start-file').addEventListener('click', () => startVisualizer('file'));
+
+            // Selection des modeles dans la barre flottante
+            document.querySelectorAll('[data-model]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const eng = getEngine();
+                    const modelId = btn.getAttribute('data-model');
+                    if (eng && modelId) {
+                        eng.setModel(modelId);
+                        syncDemoUI();
+                        const modelNames = { cyber: 'Cyber Cat 🐱', cosmic: 'Cosmic Cat 🌌', redpanda: 'Red Panda 🐼' };
+                        showDemoToast(`Modèle : ${modelNames[modelId] || modelId}`);
+                    }
+                });
+            });
+
+            // Bouton de cycle de theme / palette
+            document.getElementById('demo-theme-btn').addEventListener('click', () => {
+                const eng = getEngine();
+                if (eng) {
+                    const newPalette = eng.nextPalette();
+                    syncDemoUI();
+                    if (newPalette) showDemoToast(`Thème : ${newPalette.name || newPalette.id}`);
+                }
+            });
+
+            // Bouton toggle micro
+            document.getElementById('demo-mic-toggle-btn').addEventListener('click', async () => {
+                const eng = getEngine();
+                if (eng && eng.audio) {
+                    const isLive = await eng.audio.toggleLiveAudio();
+                    syncDemoUI();
+                    showDemoToast(isLive ? "🎙️ Microphone activé !" : "🔇 Microphone désactivé");
+                }
+            });
+
+            // Chargement de fichier audio local
+            const audioFileInput = document.getElementById('audio-file-input');
+            const demoAudioElement = document.getElementById('demo-audio');
+
+            document.getElementById('demo-load-file-btn').addEventListener('click', () => {
+                audioFileInput.click();
+            });
+
+            audioFileInput.addEventListener('change', (e) => {
+                const file = e.target.files && e.target.files[0];
+                if (!file) return;
+
+                const eng = getEngine();
+                if (!eng) return;
+
+                const fileUrl = URL.createObjectURL(file);
+                demoAudioElement.src = fileUrl;
+                demoAudioElement.play().then(() => {
+                    // Connecte la balise audio directement au pont Web Audio pour analyse FFT et sortie enceintes
+                    if (eng.audio && typeof eng.audio.connectLiveSource === 'function') {
+                        eng.audio.connectLiveSource(demoAudioElement);
+                    }
+                    syncDemoUI();
+                    showDemoToast(`🎵 Lecture de : ${file.name}`);
+                }).catch(err => {
+                    console.error("Erreur lecture audio:", err);
+                    showDemoToast("Erreur lors de la lecture audio");
+                });
+            });
+
+            // Bouton Parametres (ouvre le panneau d'effets du moteur)
+            const settingsBtn = document.getElementById('spicetify-visualizer-settings-btn');
+            settingsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (typeof window.toggleVisualizerSettingsDropdown === 'function') {
+                    window.toggleVisualizerSettingsDropdown(() => getEngine());
+                }
+            });
+
+            // Bouton Plein Ecran
+            document.getElementById('demo-fs-btn').addEventListener('click', () => {
+                const eng = getEngine();
+                if (eng) {
+                    eng.toggleFullscreen();
+                }
+            });
+
+            // Disparition douce de la barre flottante apres 3.5 secondes d'inactivite
+            let toolbarFadeTimer = null;
+            const toolbar = document.getElementById('demo-toolbar');
+
+            function resetToolbarTimer() {
+                if (document.getElementById('demo-overlay').classList.contains('hidden')) {
+                    toolbar.style.opacity = '1';
+                    toolbar.style.pointerEvents = 'auto';
+                    clearTimeout(toolbarFadeTimer);
+                    toolbarFadeTimer = setTimeout(() => {
+                        // Ne pas masquer si un dropdown est ouvert
+                        const dropdown = document.getElementById('spicetify-visualizer-settings-dropdown');
+                        if (!dropdown || !dropdown.classList.contains('open')) {
+                            toolbar.style.opacity = '0';
+                            toolbar.style.pointerEvents = 'none';
+                        }
+                    }, 3500);
+                }
+            }
+
+            window.addEventListener('mousemove', resetToolbarTimer, { passive: true });
+            window.addEventListener('keydown', (e) => {
+                resetToolbarTimer();
+                if (e.key === 'h' || e.key === 'H') {
+                    toolbar.classList.toggle('hidden');
+                }
+            });
+
+            // Ecoute les changements de modele déclenchés par raccourcis (M, T, C)
+            window.addEventListener('spicetify-visualizer-models-updated', syncDemoUI);
+            setInterval(syncDemoUI, 1000);
+
+        })();
     </script>
 
 </body>
