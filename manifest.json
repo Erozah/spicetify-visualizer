@@ -1,20 +1,41 @@
-{
-  "name": "Spicetify Visualizer",
-  "description": "Un moteur de visualisation audio 60 FPS avec physique cinématique, FFT et décors procéduraux (Cosmic Cat & Red Panda).",
-  "main": "dist/spicetify-visualizer.js",
-  "authors": [
-    {
-      "name": "Erozah",
-      "url": "https://github.com/Erozah"
-    }
-  ],
-  "readme": "README.md",
-  "preview": "assets/preview.jpg",
-  "tags": [
-    "visualizer",
-    "audio",
-    "fft",
-    "cat",
-    "panda"
-  ]
-}
+[
+  {
+    "name": "Spicetify Visualizer",
+    "description": "Un moteur de visualisation audio 60 FPS avec physique cinématique, FFT et décors procéduraux (Cosmic Cat & Red Panda).",
+    "main": "dist/spicetify-visualizer.js",
+    "authors": [
+      {
+        "name": "Erozah",
+        "url": "https://github.com/Erozah"
+      }
+    ],
+    "readme": "README.md",
+    "preview": "assets/preview.jpg",
+    "tags": [
+      "visualizer",
+      "audio",
+      "fft",
+      "cat",
+      "panda"
+    ]
+  },
+  {
+    "name": "Spicetify Visualizer",
+    "description": "Un moteur de visualisation audio 60 FPS avec physique cinématique, FFT et décors procéduraux (Cosmic Cat & Red Panda).",
+    "authors": [
+      {
+        "name": "Erozah",
+        "url": "https://github.com/Erozah"
+      }
+    ],
+    "readme": "README.md",
+    "preview": "assets/preview.jpg",
+    "tags": [
+      "visualizer",
+      "audio",
+      "fft",
+      "cat",
+      "panda"
+    ]
+  }
+]
