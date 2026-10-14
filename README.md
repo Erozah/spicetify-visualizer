@@ -1,3 +1,5 @@
+[Français](README.md) | [English](README.en.md)
+
 # 🎵 Spicetify Visualizer Engine
 
 [![Spicetify](https://img.shields.io/badge/Spicetify-Extension-success.svg?style=flat-square&logo=spotify)](https://spicetify.app/)
